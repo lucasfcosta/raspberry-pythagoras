@@ -8,19 +8,30 @@ const tweetHandler = require('./lib/tweetHandler');
 tweetHandler.setLanguage(dictionary.en);
 
 let twitterClient = new Twitter({
-  consumer_key: apiConfigs.apiKey,
-  consumer_secret: apiConfigs.apiSecret,
-  access_token_key: apiConfigs.accessToken,
-  access_token_secret: apiConfigs.accessTokenSecret
+	consumer_key: apiConfigs.apiKey,
+	consumer_secret: apiConfigs.apiSecret,
+	access_token_key: apiConfigs.accessToken,
+	access_token_secret: apiConfigs.accessTokenSecret
 });
 
 // TODO make @username configurable
 twitterClient.stream('statuses/filter', {track: '@raspythagoras'}, (stream) => {
-  stream.on('data', function(tweet) {
-    tweetHandler.handle(tweet);
-  });
+	
+	stream.on('data', (tweet) => {
+		console.log('[Mention Received] ' + tweet.text);
+
+		let response = tweetHandler.handle(tweet);
+	
+		client.post('statuses/update', {status: response}, (error, tweet, response) => {
+			if (error) {
+				console.log(error);
+			} else {
+				console.log('[Answer Tweeted] ' + response);
+			}
+		});
+	});
  
-  stream.on('error', function(error) {
-    console.log(error);
-  });
+	stream.on('error', (error) => {
+		console.log(error);
+	});
 });
