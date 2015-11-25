@@ -16,6 +16,12 @@
 			"check out my answer for what you've asked:"
 		],
 		"idle": [
+		],
+		"errors": [
+			"I'm sorry but I couldn't find an answer short enough for you.",
+			"I couldn't find an answer short enough for you, please try asking fewer questions.",
+			"I couldn't find an answer short enough for you, please try asking smaller questions.",
+			"I'm afraid the answer for your question is too long, I'm sorry."
 		]
 	},
 	"es": {
