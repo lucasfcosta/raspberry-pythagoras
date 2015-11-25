@@ -9,13 +9,14 @@ let twitterClient = new Twitter({
   access_token_secret: apiConfigs.accessTokenSecret
 });
 
-
+// TODO make @username configurable
 twitterClient.stream('statuses/filter', {track: '@raspythagoras'}, (stream) => {
   stream.on('data', function(tweet) {
     console.log(tweet.text);
   });
  
   stream.on('error', function(error) {
-    throw error;
+    console.log(error);
   });
 });
+
