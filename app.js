@@ -17,7 +17,7 @@ let twitterClient = new Twitter({
 // TODO make @username configurable
 twitterClient.stream('statuses/filter', {track: '@raspythagoras'}, (stream) => {
   stream.on('data', function(tweet) {
-    console.log(tweet.text);
+    tweetHandler.handle(tweet);
   });
  
   stream.on('error', function(error) {
