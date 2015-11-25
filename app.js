@@ -16,13 +16,13 @@ let twitterClient = new Twitter({
 
 // TODO make @username configurable
 twitterClient.stream('statuses/filter', {track: '@raspythagoras'}, (stream) => {
-	
+
 	stream.on('data', (tweet) => {
 		console.log('[Mention Received] ' + tweet.text);
 
 		let responseText = tweetHandler.handle(tweet);
 	
-		twitterClient.post('statuses/update', {status: response}, (error, tweet, response) => {
+		twitterClient.post('statuses/update', {status: responseText}, (error, tweet, response) => {
 			if (error) {
 				console.log(error);
 			} else {
