@@ -1,6 +1,11 @@
 'use strict';
-const Twitter = require('twitter');
 const apiConfigs = require('./configs/api');
+const dictionary = require('./configs/language');
+
+const Twitter = require('twitter');
+const tweetHandler = require('./lib/tweetHandler');
+
+tweetHandler.setLanguage(dictionary.en);
 
 let twitterClient = new Twitter({
   consumer_key: apiConfigs.apiKey,
@@ -19,4 +24,3 @@ twitterClient.stream('statuses/filter', {track: '@raspythagoras'}, (stream) => {
     console.log(error);
   });
 });
-

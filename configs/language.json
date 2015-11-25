@@ -1,0 +1,27 @@
+{
+	"en": {
+		"greetings": [
+			"Hey",
+			"Yo",
+			"Nice to see you",
+			"Hi",
+			"Hello",
+			"Sup"
+		],
+		"answers": [
+			"it's always a pleasure to answer you:",
+			"here comes an answer for you:",
+			"this is your answer:",
+			"I've solved what you asked me, take a look:",
+			"check out my answer for what you've asked:"
+		],
+		"idle": [
+		]
+	},
+	"es": {
+
+	},
+	"pt-br": {
+
+	}
+}
