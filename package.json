@@ -1,0 +1,31 @@
+{
+  "name": "raspberry-pythagoras",
+  "version": "0.0.0",
+  "description": "A Twitter bot that answers math questions",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasfcosta/raspberry-pythagoras.git"
+  },
+  "keywords": [
+    "twitter",
+    "bot",
+    "math",
+    "questions",
+    "raspberry",
+    "pythagoras"
+  ],
+  "author": "Lucas Fernandes da Costa",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/lucasfcosta/raspberry-pythagoras/issues"
+  },
+  "homepage": "https://github.com/lucasfcosta/raspberry-pythagoras#readme",
+  "dependencies": {
+    "mathjs": "^2.4.2",
+    "twitter": "^1.2.5"
+  }
+}
