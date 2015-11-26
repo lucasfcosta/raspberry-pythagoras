@@ -16,6 +16,15 @@
 			"check out my answer for what you've asked:"
 		],
 		"idle": [
+			"Ready for a tip?\nYou can calculate sine, cosine and tangent using sin(x), cos(x) and tan(x).",
+			"Here goes a tip!\nYou can calculate square roots by doing sqrt(x).",
+			"Yo, what about another tip?\nYou can convert some measures doing something like \"3 inch to cm\"",
+			"Did you know I can convert units like kilograms, inches, kms/h, cms, grams, degrees fahrenheit and so on?",
+			"Hey guys, this is not a tip, It's just me bragging about how smart I am.",
+			"Time for a tip!\nYou can use different measure units on your operations and tell the result's desired unit.\nJust like: \"5cm + 0.2m in inch\"",
+			"New tip!\nYou can represent matrices like: [1, 1, 1; 2, 2, 2]. The \";\" character separates the lines.",
+			"Killer tip!\nYou can also operate using matrices, like: \"[1,2; 2,3] * [4,5; 6,7]\"",
+			"Don't be afraid of talking to me! All you need to do is mention my username and then send me some math operations!"
 		],
 		"errors": [
 			"I'm sorry but I couldn't find an answer short enough for you.",

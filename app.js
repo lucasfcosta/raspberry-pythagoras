@@ -4,8 +4,9 @@ const dictionary = require('./configs/language');
 
 const Twitter = require('twitter');
 const tweetHandler = require('./lib/tweetHandler');
+const chosenDictionary = dictionary.en;
 
-tweetHandler.setLanguage(dictionary.en);
+tweetHandler.setLanguage(chosenDictionary);
 
 let twitterClient = new Twitter({
 	consumer_key: apiConfigs.apiKey,
@@ -35,3 +36,19 @@ twitterClient.stream('statuses/filter', {track: '@raspythagoras'}, (stream) => {
 		console.log(error);
 	});
 });
+
+// Post a tip 3 hours
+setInterval(() => {
+	let randomTipNumber = Math.floor(Math.random() * (chosenDictionary.idle.length - 1)) + 1;
+	let randomTipText = chosenDictionary.idle[randomTipNumber];
+	twitterClient.post('statuses/update', {status: randomTipText}, (error, tweet, response) => {
+		if (error) {
+			console.log(error);
+		} else {
+			console.log('-----------------------');
+			console.log('[Tip Tweeted]')
+			console.log(randomTipText)
+			console.log('-----------------------');
+		}
+	});	
+}, 10800000);
