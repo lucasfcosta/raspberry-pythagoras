@@ -27,7 +27,7 @@
 			"Killer tip!\nYou can also operate using matrices, like: [1,2;2,3]*[4,5;6,7].",
 			"Don't be afraid of talking to me! All you need to do is mention my username and then send me some math operations!",
 			"TIP TIME! Be sure not to use any whitespaces between operators. For example: 5 + 2 isn't a valid operation, but 5+2 is.",
-			"You can compute a value's factorial using: factorial(x). Try it!"
+			"You can compute a value's factorial using: factorial(x). Try it!",
 			"To use a fraction in an operation you just need to use fraction(numerator,denominator). Feel free to do so!",
 			"Time for a tip!\nTo calculate the Nth root of a value you can type: nthRoot(number,Nth_root). For example: nthRoot(9,2).",
 			"Random numbers are cool! You can get one using: randomInt(min,max).\nYou can also do math with them, for example: randomInt(0,10)*2.",
@@ -37,7 +37,7 @@
 			"Tip coming!\nTo ask for the least common multiple of two or more numbers all you've gotta do is use: lcm(x,y,z).",
 			"To calculate the modulus, the remainder of an integer division try using: mod(x,y).",
 			"New and useful tip!\nYou can know if a number is smaller, bigger or equal to another one using smaller(x,y), larger(x,y) and equal(x,y).",
-			"Yes, life's meaning is 42. I've calculated it many times.",
+			"Yes, life's meaning is 42. I've calculated it many times."
 		],
 		"lengthErrors": [
 			"I'm sorry but I couldn't find an answer short enough for you.",
