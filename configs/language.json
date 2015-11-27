@@ -35,7 +35,7 @@
 			"I'm so smart I can even calculate the logarithm of a value. To ask me this you can type: log(x,base).",
 			"If you thought I cannot calculate the greatest common divisor for two or more values you are wrong. Try using: gcd(x,y,z), for example.",
 			"Tip coming!\nTo ask for the least common multiple of two or more numbers all you've gotta do is use: lcm(x,y,z).",
-			"To calculate the modulus, the remainder of an integer division try using: mod(x,y).",
+			"To calculate the modulus (the remainder of an integer division) try using: mod(x,y).",
 			"New and useful tip!\nYou can know if a number is smaller, bigger or equal to another one using smaller(x,y), larger(x,y) and equal(x,y).",
 			"Yes, life's meaning is 42. I've calculated it many times."
 		],
