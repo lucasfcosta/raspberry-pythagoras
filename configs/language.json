@@ -7,7 +7,8 @@
 			"Hi",
 			"Hello",
 			"Sup",
-			"Thanks for your question"
+			"Thanks for your question",
+			"Yay buddy"
 		],
 		"answers": [
 			"it's always a pleasure to answer you:",
@@ -36,7 +37,7 @@
 			"Tip coming!\nTo ask for the least common multiple of two or more numbers all you've gotta do is use: lcm(x,y,z).",
 			"To calculate the modulus, the remainder of an integer division try using: mod(x,y).",
 			"New and useful tip!\nYou can know if a number is smaller, bigger or equal to another one using smaller(x,y), larger(x,y) and equal(x,y).",
-			"Yes, life's meaning is 42. I've calculated it many times."
+			"Yes, life's meaning is 42. I've calculated it many times.",
 		],
 		"lengthErrors": [
 			"I'm sorry but I couldn't find an answer short enough for you.",
