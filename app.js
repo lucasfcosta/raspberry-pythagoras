@@ -17,8 +17,7 @@ let twitterClient = new Twitter({
 
 console.log("Starting Raspberry Pythagoras");
 
-// TODO make @username configurable
-twitterClient.stream('statuses/filter', {track: '@raspythagoras'}, (stream) => {
+twitterClient.stream('statuses/filter', {track: `@${apiConfigs.username}`}, (stream) => {
 
 	console.log("Monitoring tweet stream...");
 
