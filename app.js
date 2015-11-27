@@ -15,11 +15,11 @@ let twitterClient = new Twitter({
 	access_token_secret: apiConfigs.accessTokenSecret
 });
 
-console.log("Starting Raspberry Pythagoras");
+console.log('Starting Raspberry Pythagoras');
 
 twitterClient.stream('statuses/filter', {track: `@${apiConfigs.username}`}, (stream) => {
 
-	console.log("Monitoring tweet stream...");
+	console.log('Monitoring tweet stream...');
 
 	stream.on('data', (tweet) => {
 		let username = tweet.user.screen_name;

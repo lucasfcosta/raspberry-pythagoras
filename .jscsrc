@@ -1,0 +1,10 @@
+{
+    "preset": "google",
+    "esnext": true,
+    "validateIndentation": 4,
+    "disallowVar": true,
+    "disallowUnusedParams": true,
+    "maximumLineLength": {
+        "value": 120
+    }
+}
