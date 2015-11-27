@@ -13,7 +13,9 @@
 			"here comes an answer for you:",
 			"this is your answer:",
 			"I've solved what you asked me, take a look:",
-			"check out my answer for what you've asked:"
+			"check out my answer for what you've asked:",
+			"I've came to this result:",
+			"I've done some math for you:"
 		],
 		"idle": [
 			"Ready for a tip?\nYou can calculate sine, cosine and tangent using sin(x), cos(x) and tan(x).",
