@@ -29,7 +29,7 @@
 			"Killer tip!\nYou can also operate using matrices, like: \"[1,2; 2,3] * [4,5; 6,7]\"",
 			"Don't be afraid of talking to me! All you need to do is mention my username and then send me some math operations!"
 		],
-		"errors": [
+		"lengthErrors": [
 			"I'm sorry but I couldn't find an answer short enough for you.",
 			"I couldn't find an answer short enough for you, please try asking fewer questions.",
 			"I couldn't find an answer short enough for you, please try asking smaller questions.",
