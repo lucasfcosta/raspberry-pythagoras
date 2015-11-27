@@ -59,7 +59,7 @@ twitterClient.stream('statuses/filter', {track: '@raspythagoras'}, (stream) => {
 	});
 });
 
-// Post a tip 3 hours
+// Post a tip every 3 hours
 setInterval(() => {
 	let randomTipNumber = Math.floor(Math.random() * (chosenDictionary.idle.length - 1)) + 1;
 	let randomTipText = chosenDictionary.idle[randomTipNumber];
