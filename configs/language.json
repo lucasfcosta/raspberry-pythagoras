@@ -50,6 +50,10 @@
 			"It's a shame I couldn't answer the question you've sent me. I've found this error:",
 			"I'm sorry but I couldn't answer your question because of this error:",
 			"I'm sorry to bother you, but I just wanted to tell you I cannot answer your question because of this error:"
+		],
+		"divisionByZeroErrors": [
+			"are you trying to trick me?",
+			"Google: \"division by zero\", smarty..."
 		]
 	},
 	"es": {
