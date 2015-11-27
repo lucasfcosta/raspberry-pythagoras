@@ -34,6 +34,12 @@
 			"I couldn't find an answer short enough for you, please try asking fewer questions.",
 			"I couldn't find an answer short enough for you, please try asking smaller questions.",
 			"I'm afraid the answer for your question is too long, I'm sorry."
+		],
+		"parseErrors": [
+			"I'm sorry to inform you I've found the following error in your question:",
+			"It's a shame I couldn't answer the question you've sent me. I've found this error:",
+			"I'm sorry but I couldn't answer your question because of this error:",
+			"I'm sorry to bother you, but I just wanted to tell you I cannot answer your question because of this error:"
 		]
 	},
 	"es": {

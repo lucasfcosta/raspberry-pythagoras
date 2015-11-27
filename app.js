@@ -23,21 +23,39 @@ twitterClient.stream('statuses/filter', {track: '@raspythagoras'}, (stream) => {
 	console.log("Monitoring tweet stream...");
 
 	stream.on('data', (tweet) => {
-		console.log('[Mention Received] ' + tweet.text);
+		let username = tweet.user.screen_name;
+		console.log(`[Mention Received] ${username}: ${tweet.text}`);
 
-		let responseText = tweetHandler.handle(tweet);
-	
-		twitterClient.post('statuses/update', {status: responseText}, (error, tweet, response) => {
-			if (error) {
-				console.log(error);
+		tweetHandler.handle(tweet, (handleError, responseText) => {
+			if (handleError) {
+				console.log(`[Error] ${handleError.message}`);
+
+				// Send DM to user explaining error
+				let randomGreeting = Math.floor(Math.random() * (chosenDictionary.greetings.length - 1)) + 1;
+				let dmTextNumber = Math.floor(Math.random() * (chosenDictionary.parseErrors.length - 1)) + 1;
+				let dmText = `${chosenDictionary.greetings[randomGreeting]} ${username},\n${chosenDictionary.parseErrors[dmTextNumber]}\n${handleError.message}`;
+
+				twitterClient.post('direct_messages/new', {screen_name: tweet.user.screen_name, text: dmText}, (error, tweet, response) => {
+					if (error) {
+						console.log(`[DM Error] ${error.message}`);
+					} else {
+						console.log(`[DM Sent] Sent DM with error ${handleError.message} to user ${username}.`);
+					}
+				});
 			} else {
-				console.log('[Answer Tweeted] ' + responseText);
+				twitterClient.post('statuses/update', {status: responseText}, (error, tweet, response) => {
+					if (error) {
+						console.log(`[Tweet Error] ${error}`);
+					} else {
+						console.log(`[Answer Tweeted] ${responseText}`);
+					}
+				});				
 			}
 		});
 	});
  
 	stream.on('error', (error) => {
-		console.log(error);
+		console.log(`[Unhandled Error] ${error.message}`);
 	});
 });
 
@@ -47,7 +65,7 @@ setInterval(() => {
 	let randomTipText = chosenDictionary.idle[randomTipNumber];
 	twitterClient.post('statuses/update', {status: randomTipText}, (error, tweet, response) => {
 		if (error) {
-			console.log(error);
+			console.log(`[Tip Tweet Error] ${error}`);
 		} else {
 			console.log('-----------------------');
 			console.log('[Tip Tweeted]')
