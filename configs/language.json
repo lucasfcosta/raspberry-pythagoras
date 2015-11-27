@@ -20,14 +20,23 @@
 		],
 		"idle": [
 			"Ready for a tip?\nYou can calculate sine, cosine and tangent using sin(x), cos(x) and tan(x).",
-			"Here goes a tip!\nYou can calculate square roots by doing sqrt(x).",
-			"Yo, what about another tip?\nYou can convert some measures doing something like \"3 inch to cm\"",
-			"Did you know I can convert units like kilograms, inches, kms/h, cms, grams, degrees fahrenheit and so on?",
+			"Here goes a tip!\nYou can calculate square roots by doing sqrt(x) and cubic roots by doing cbrt(x).",
 			"Hey guys, this is not a tip, It's just me bragging about how smart I am.",
-			"Time for a tip!\nYou can use different measure units on your operations and tell the result's desired unit.\nJust like: \"5cm + 0.2m in inch\"",
-			"New tip!\nYou can represent matrices like: [1, 1, 1; 2, 2, 2]. The \";\" character separates the lines.",
-			"Killer tip!\nYou can also operate using matrices, like: \"[1,2; 2,3] * [4,5; 6,7]\"",
-			"Don't be afraid of talking to me! All you need to do is mention my username and then send me some math operations!"
+			"New tip!\nYou can represent matrices like: [1,1,1;2,2,2]. The \";\" character separates the lines.",
+			"Killer tip!\nYou can also operate using matrices, like: [1,2;2,3]*[4,5;6,7].",
+			"Don't be afraid of talking to me! All you need to do is mention my username and then send me some math operations!",
+			"TIP TIME! Be sure not to use any whitespaces between operators. For example: 5 + 2 isn't a valid operation, but 5+2 is.",
+			"You can compute a value's factorial using: factorial(x). Try it!"
+			"To use a fraction in an operation you just need to use fraction(numerator,denominator). Feel free to do so!",
+			"Time for a tip!\nTo calculate the Nth root of a value you can type: nthRoot(number,Nth_root). For example: nthRoot(9,2).",
+			"Random numbers are cool! You can get one using: randomInt(min,max).\nYou can also do math with them, for example: randomInt(0,10)*2.",
+			"Need to round values? No problem! You can do it using ceil(x) or floor(x).",
+			"I'm so smart I can even calculate the logarithm of a value. To ask me this you can type: log(x,base).",
+			"If you thought I cannot calculate the greatest common divisor for two or more values you are wrong. Try using: gcd(x,y,z), for example.",
+			"Tip coming!\nTo ask for the least common multiple of two or more numbers all you've gotta do is use: lcm(x,y,z).",
+			"To calculate the modulus, the remainder of an integer division try using: mod(x,y).",
+			"New and useful tip!\nYou can know if a number is smaller, bigger or equal to another one using smaller(x,y), larger(x,y) and equal(x,y).",
+			"Yes, life's meaning is 42. I've calculated it many times."
 		],
 		"lengthErrors": [
 			"I'm sorry but I couldn't find an answer short enough for you.",
