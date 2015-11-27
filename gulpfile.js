@@ -9,6 +9,7 @@ gulp.task('jscs', () => {
 	    .pipe(excludeGitignore())
         .pipe(jscs())
         .pipe(jscs.reporter())
+        .pipe(jscs.reporter('fail'))
 });
 
 // Lints JSON files
