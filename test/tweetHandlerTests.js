@@ -117,4 +117,28 @@ describe('tweetHandler Tests', () => {
 			assert.sameDeepMembers(results, expectedResults);
 		});
 	});
+
+	describe('createResponse', () => {
+		it('should return an empty string if no results are passed in', () => {
+			let responseText = tweetHandler.createResponse('FakeName', []);
+
+			assert.strictEqual(responseText.length, 0);
+		});
+
+		it('should return a string including operations and results if results array is not empty', () => {
+			let results = [{operation: '2+2', result: 4}, {operation: '4/4', result: 1}];
+			let responseText = tweetHandler.createResponse('FakeName', results);
+
+			assert.include(responseText, `${results[0].operation} = ${results[0].result}`);
+			assert.include(responseText, `${results[1].operation} = ${results[1].result}`);
+		});
+
+		it('should throw an error and call createErrorMessage() if response has more than 140 characters', () => {
+			let spy = sandbox.spy(tweetHandler, 'createErrorMessage');
+			let results = [{operation: '0+2'.repeat(150), result: 0}];
+
+			assert.throws(() => {tweetHandler.createResponse('FakeUser', results)});
+			assert.isTrue(spy.calledOnce);
+		});
+	});
 });
