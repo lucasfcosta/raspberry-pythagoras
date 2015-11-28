@@ -36,11 +36,11 @@ describe('tweetHandler Tests', () => {
 			});
 		});
 
-		it('should call calculateResults with tweet\'s operations', () => {
+		it('should call calculateResults with username and tweet\'s operations', () => {
 			let spy = sandbox.spy(tweetHandler, 'calculateResults');
 
 			tweetHandler.handle(fakeTweet, (error, responseText) => {
-				assert.isTrue(spy.calledWithExactly(['2+2', '4+4']));
+				assert.isTrue(spy.calledWithExactly('FakeUser', ['2+2', '4+4']));
 			});
 		});
 
@@ -93,26 +93,26 @@ describe('tweetHandler Tests', () => {
 			let spy = sandbox.spy(tweetHandler, 'createErrorMessage');
 			let operations = ['2x2'];
 
-			assert.throws(() => {tweetHandler.calculateResults(operations)});
+			assert.throws(() => {tweetHandler.calculateResults('FakeUser', operations)}, '@FakeUser');
 			assert.isTrue(spy.calledOnce);
 		});
 
 		it('should throw error if one of the operations results is \'NaN\'', () => {
 			let operations = ['2+2', '0/0'];
 
-			assert.throws(() => {tweetHandler.calculateResults(operations)});
+			assert.throws(() => {tweetHandler.calculateResults('FakeUser', operations)}, 'NaN');
 		});
 
 		it('should throw error if one of the operations results is \'Infinity\'', () => {
 			let operations = ['2+2', '4/0'];
 
-			assert.throws(() => {tweetHandler.calculateResults(operations)});
+			assert.throws(() => {tweetHandler.calculateResults('FakeUser', operations)}, 'Infinity');
 		});
 
 		it('should return an array containing operations and their results', () => {
 			let operations = ['2+2', '4/4'];
 			let expectedResults = [{operation: '2+2', result: 4}, {operation: '4/4', result: 1}];
-			let results = tweetHandler.calculateResults(operations);
+			let results = tweetHandler.calculateResults('FakeUser', operations);
 
 			assert.sameDeepMembers(results, expectedResults);
 		});
