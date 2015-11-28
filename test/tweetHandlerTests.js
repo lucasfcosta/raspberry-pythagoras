@@ -137,7 +137,7 @@ describe('tweetHandler Tests', () => {
 			let spy = sandbox.spy(tweetHandler, 'createErrorMessage');
 			let results = [{operation: '0+2'.repeat(150), result: 0}];
 
-			assert.throws(() => {tweetHandler.createResponse('FakeUser', results)});
+			assert.throws(() => {tweetHandler.createResponse('FakeUser', results)}, '@FakeUser');
 			assert.isTrue(spy.calledOnce);
 		});
 	});
