@@ -24,7 +24,6 @@ describe('tweetHandler Tests', () => {
 	});
 
 	describe('handle', () => {
-
 		it('should call getOperations with tweet\'s text', () => {
 			let spy = sandbox.spy(tweetHandler, 'getOperations');
 
@@ -68,6 +67,42 @@ describe('tweetHandler Tests', () => {
 				assert.deepEqual(error, fakeError);
 				assert.strictEqual(responseText, undefined);
 			});
+		});
+	});
+
+	describe('getOperations', () => {
+		it('should return an empty array if no operations are found on text', () => {
+			let foundOperations = tweetHandler.getOperations('Text without operations.');
+
+			assert.strictEqual(foundOperations.length, 0);
+		});
+
+		it('should return an array containing operations found on text', () => {
+			let foundOperations = tweetHandler.getOperations(fakeTweet.text);
+
+			assert.sameMembers(foundOperations, ['2+2', '4+4']);
+		});
+	});
+
+	describe('calculateResults', () => {
+		it('should throw error if one of the operations results is \'NaN\'', () => {
+			let operations = ['2+2', '0/0'];
+
+			assert.throws(() => {tweetHandler.calculateResults(operations)});
+		});
+
+		it('should throw error if one of the operations results is \'Infinity\'', () => {
+			let operations = ['2+2', '4/0'];
+
+			assert.throws(() => {tweetHandler.calculateResults(operations)});
+		});
+
+		it('should return an array containing operations and their results', () => {
+			let operations = ['2+2', '4/4'];
+			let expectedResults = [{operation: '2+2', result: 4}, {operation: '4/4', result: 1}];
+			let results = tweetHandler.calculateResults(operations);
+
+			assert.sameDeepMembers(results, expectedResults);
 		});
 	});
 });
