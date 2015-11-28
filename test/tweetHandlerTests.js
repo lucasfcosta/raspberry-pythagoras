@@ -8,6 +8,10 @@ let sandbox = sinon.sandbox.create();
 let fakeTweet = {text: 'Fake text.\n2+2.\n4+4.', user: {screen_name: 'FakeUser'}};
 
 describe('tweetHandler Tests', () => {
+	beforeEach(() => {
+		tweetHandler.setLanguage(dictionary.en);
+	});
+	
 	afterEach(() => {
 		sandbox.restore();
 	});
@@ -85,6 +89,14 @@ describe('tweetHandler Tests', () => {
 	});
 
 	describe('calculateResults', () => {
+		it('should throw an error with createErrorMessage() result if math.eval() throws an error', () => {
+			let spy = sandbox.spy(tweetHandler, 'createErrorMessage');
+			let operations = ['2x2'];
+
+			assert.throws(() => {tweetHandler.calculateResults(operations)});
+			assert.isTrue(spy.calledOnce);
+		});
+
 		it('should throw error if one of the operations results is \'NaN\'', () => {
 			let operations = ['2+2', '0/0'];
 

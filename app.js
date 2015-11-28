@@ -30,11 +30,7 @@ twitterClient.stream('statuses/filter', {track: `@${apiConfigs.username}`}, (str
 				console.log(`[Error] ${handleError.message}`);
 
 				// Send DM to user explaining error
-				let randomGreeting = Math.floor(Math.random() * (chosenDictionary.greetings.length - 1)) + 1;
-				let dmTextNumber = Math.floor(Math.random() * (chosenDictionary.parseErrors.length - 1)) + 1;
-				let dmText = `${chosenDictionary.greetings[randomGreeting]} ${username},\n${chosenDictionary.parseErrors[dmTextNumber]}\n${handleError.message}`;
-
-				twitterClient.post('direct_messages/new', {screen_name: tweet.user.screen_name, text: dmText}, (error, tweet, response) => {
+				twitterClient.post('direct_messages/new', {screen_name: username, text: handleError.message}, (error, tweet, response) => {
 					if (error) {
 						console.log(`[DM Error] ${error.message}`);
 					} else {
