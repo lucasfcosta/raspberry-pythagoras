@@ -141,4 +141,17 @@ describe('tweetHandler Tests', () => {
 			assert.isTrue(spy.calledOnce);
 		});
 	});
+
+	describe('createErrorMessage', () => {
+		it('should return an error message with username and error', () => {
+			let errorMessage = tweetHandler.createErrorMessage('FakeUser', ['randomErrorMessage', 'randomErrorMessage']);
+			assert.include(errorMessage, '@FakeUser');
+			assert.include(errorMessage, 'randomErrorMessage');
+		});
+
+		it('should return an error message containing an specificError if there is one', () => {
+			let errorMessage = tweetHandler.createErrorMessage('FakeUser', ['randomErrorMessage', 'randomErrorMessage'], 'specificError');
+			assert.include(errorMessage, 'specificError');
+		});
+	});
 });
