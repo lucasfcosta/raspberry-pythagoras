@@ -1,7 +1,8 @@
 const gulp = require('gulp');
+const excludeGitignore = require('gulp-exclude-gitignore');
 const jscs = require('gulp-jscs');
 const jsonlint = require('gulp-jsonlint');
-const excludeGitignore = require('gulp-exclude-gitignore');
+const mocha = require('gulp-mocha');
 
 // Lints JavaScript files
 gulp.task('jscs', () => {
@@ -9,7 +10,7 @@ gulp.task('jscs', () => {
 	    .pipe(excludeGitignore())
         .pipe(jscs())
         .pipe(jscs.reporter())
-        .pipe(jscs.reporter('fail'))
+        .pipe(jscs.reporter('fail'));
 });
 
 // Lints JSON files
@@ -18,11 +19,15 @@ gulp.task('jsonlint', () => {
 	    .pipe(excludeGitignore())
         .pipe(jsonlint())
         .pipe(jsonlint.reporter())
-        .pipe(jsonlint.failAfterError())
+        .pipe(jsonlint.failAfterError());
 });
 
+// Tests
+gulp.task('mocha', () => {
+    return gulp.src('test/*.js', {read: false})
+        .pipe(mocha({reporter: 'spec'}));
+});
 
-
-
-
-gulp.task('default', ['jscs', 'jsonlint']);
+gulp.task('default', ['jscs', 'jsonlint', 'mocha']);
+gulp.task('lint', ['jscs', 'jsonlint']);
+gulp.task('test', ['mocha']);
