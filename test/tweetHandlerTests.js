@@ -8,150 +8,160 @@ let sandbox = sinon.sandbox.create();
 let fakeTweet = {text: 'Fake text.\n2+2.\n4+4.', user: {screen_name: 'FakeUser'}};
 
 describe('tweetHandler Tests', () => {
-	beforeEach(() => {
-		tweetHandler.setLanguage(dictionary.en);
-	});
-	
-	afterEach(() => {
-		sandbox.restore();
-	});
+    beforeEach(() => {
+        tweetHandler.setLanguage(dictionary.en);
+    });
 
-	describe('setLanguage', () => {
-		it('should set the dictionary property', () => {
-			let fakeDictionary = {mock: 'This is a fake dictionary.'};
-			tweetHandler.setLanguage(fakeDictionary);
-			assert.deepEqual(tweetHandler.dictionary, fakeDictionary);
+    afterEach(() => {
+        sandbox.restore();
+    });
 
-			tweetHandler.setLanguage(dictionary.en);
-			assert.deepEqual(tweetHandler.dictionary, dictionary.en);
-		});
-	});
+    describe('setLanguage', () => {
+        it('should set the dictionary property', () => {
+            let fakeDictionary = {mock: 'This is a fake dictionary.'};
+            tweetHandler.setLanguage(fakeDictionary);
+            assert.deepEqual(tweetHandler.dictionary, fakeDictionary);
 
-	describe('handle', () => {
-		it('should call getOperations with tweet\'s text', () => {
-			let spy = sandbox.spy(tweetHandler, 'getOperations');
+            tweetHandler.setLanguage(dictionary.en);
+            assert.deepEqual(tweetHandler.dictionary, dictionary.en);
+        });
+    });
 
-			tweetHandler.handle(fakeTweet, (error, responseText) => {
-				assert.isTrue(spy.calledWithExactly('Fake text.\n2+2.\n4+4.'));
-			});
-		});
+    describe('handle', () => {
+        it('should call getOperations with tweet\'s text', () => {
+            let spy = sandbox.spy(tweetHandler, 'getOperations');
 
-		it('should call calculateResults with username and tweet\'s operations', () => {
-			let spy = sandbox.spy(tweetHandler, 'calculateResults');
+            tweetHandler.handle(fakeTweet, (error, responseText) => {
+                assert.isTrue(spy.calledWithExactly('Fake text.\n2+2.\n4+4.'));
+            });
+        });
 
-			tweetHandler.handle(fakeTweet, (error, responseText) => {
-				assert.isTrue(spy.calledWithExactly('FakeUser', ['2+2', '4+4']));
-			});
-		});
+        it('should call calculateResults with username and tweet\'s operations', () => {
+            let spy = sandbox.spy(tweetHandler, 'calculateResults');
 
-		it('should call createResponse with screen_name and operations/results array', () => {
-			let spy = sandbox.spy(tweetHandler, 'createResponse');
-			let operationsAndResults = [{operation: '2+2', result: 4}, {operation: '4+4', result: 8}];
+            tweetHandler.handle(fakeTweet, (error, responseText) => {
+                assert.isTrue(spy.calledWithExactly('FakeUser', ['2+2', '4+4']));
+            });
+        });
 
-			tweetHandler.handle(fakeTweet, (error, responseText) => {
-				assert.isTrue(spy.calledWithExactly('FakeUser', operationsAndResults));
-			});
-		});
+        it('should call createResponse with screen_name and operations/results array', () => {
+            let spy = sandbox.spy(tweetHandler, 'createResponse');
+            let operationsAndResults = [{operation: '2+2', result: 4}, {operation: '4+4', result: 8}];
 
-		it('should callback with error and undefined response if calculateResults fails', () => {
-			let fakeError = new Error('Fake error.');
-			sandbox.stub(tweetHandler, 'calculateResults').throws(fakeError);
+            tweetHandler.handle(fakeTweet, (error, responseText) => {
+                assert.isTrue(spy.calledWithExactly('FakeUser', operationsAndResults));
+            });
+        });
 
-			tweetHandler.handle(fakeTweet, (error, responseText) => {
-				assert.deepEqual(error, fakeError);
-				assert.strictEqual(responseText, undefined);
-			});
-		});
+        it('should callback with error and undefined response if calculateResults fails', () => {
+            let fakeError = new Error('Fake error.');
+            sandbox.stub(tweetHandler, 'calculateResults').throws(fakeError);
 
-		it('should callback with error and undefined response if createResponse fails', () => {
-			let fakeError = new Error('Fake error.');
-			sandbox.stub(tweetHandler, 'createResponse').throws(fakeError);
+            tweetHandler.handle(fakeTweet, (error, responseText) => {
+                assert.deepEqual(error, fakeError);
+                assert.strictEqual(responseText, undefined);
+            });
+        });
 
-			tweetHandler.handle(fakeTweet, (error, responseText) => {
-				assert.deepEqual(error, fakeError);
-				assert.strictEqual(responseText, undefined);
-			});
-		});
-	});
+        it('should callback with error and undefined response if createResponse fails', () => {
+            let fakeError = new Error('Fake error.');
+            sandbox.stub(tweetHandler, 'createResponse').throws(fakeError);
 
-	describe('getOperations', () => {
-		it('should return an empty array if no operations are found on text', () => {
-			let foundOperations = tweetHandler.getOperations('Text without operations.');
+            tweetHandler.handle(fakeTweet, (error, responseText) => {
+                assert.deepEqual(error, fakeError);
+                assert.strictEqual(responseText, undefined);
+            });
+        });
+    });
 
-			assert.strictEqual(foundOperations.length, 0);
-		});
+    describe('getOperations', () => {
+        it('should return an empty array if no operations are found on text', () => {
+            let foundOperations = tweetHandler.getOperations('Text without operations.');
 
-		it('should return an array containing operations found on text', () => {
-			let foundOperations = tweetHandler.getOperations(fakeTweet.text);
+            assert.strictEqual(foundOperations.length, 0);
+        });
 
-			assert.sameMembers(foundOperations, ['2+2', '4+4']);
-		});
-	});
+        it('should return an array containing operations found on text', () => {
+            let foundOperations = tweetHandler.getOperations(fakeTweet.text);
 
-	describe('calculateResults', () => {
-		it('should throw an error with createErrorMessage() result if math.eval() throws an error', () => {
-			let spy = sandbox.spy(tweetHandler, 'createErrorMessage');
-			let operations = ['2x2'];
+            assert.sameMembers(foundOperations, ['2+2', '4+4']);
+        });
+    });
 
-			assert.throws(() => {tweetHandler.calculateResults('FakeUser', operations)}, '@FakeUser');
-			assert.isTrue(spy.calledOnce);
-		});
+    describe('calculateResults', () => {
+        it('should throw an error with createErrorMessage() result if math.eval() throws an error', () => {
+            let spy = sandbox.spy(tweetHandler, 'createErrorMessage');
+            let operations = ['2x2'];
 
-		it('should throw error if one of the operations results is \'NaN\'', () => {
-			let operations = ['2+2', '0/0'];
+            assert.throws(() => {
+                tweetHandler.calculateResults('FakeUser', operations);
+            }, '@FakeUser');
+            assert.isTrue(spy.calledOnce);
+        });
 
-			assert.throws(() => {tweetHandler.calculateResults('FakeUser', operations)}, 'NaN');
-		});
+        it('should throw error if one of the operations results is \'NaN\'', () => {
+            let operations = ['2+2', '0/0'];
 
-		it('should throw error if one of the operations results is \'Infinity\'', () => {
-			let operations = ['2+2', '4/0'];
+            assert.throws(() => {
+                tweetHandler.calculateResults('FakeUser', operations);
+            }, 'NaN');
+        });
 
-			assert.throws(() => {tweetHandler.calculateResults('FakeUser', operations)}, 'Infinity');
-		});
+        it('should throw error if one of the operations results is \'Infinity\'', () => {
+            let operations = ['2+2', '4/0'];
 
-		it('should return an array containing operations and their results', () => {
-			let operations = ['2+2', '4/4'];
-			let expectedResults = [{operation: '2+2', result: 4}, {operation: '4/4', result: 1}];
-			let results = tweetHandler.calculateResults('FakeUser', operations);
+            assert.throws(() => {
+                tweetHandler.calculateResults('FakeUser', operations);
+            }, 'Infinity');
+        });
 
-			assert.sameDeepMembers(results, expectedResults);
-		});
-	});
+        it('should return an array containing operations and their results', () => {
+            let operations = ['2+2', '4/4'];
+            let expectedResults = [{operation: '2+2', result: 4}, {operation: '4/4', result: 1}];
+            let results = tweetHandler.calculateResults('FakeUser', operations);
 
-	describe('createResponse', () => {
-		it('should return an empty string if no results are passed in', () => {
-			let responseText = tweetHandler.createResponse('FakeName', []);
+            assert.sameDeepMembers(results, expectedResults);
+        });
+    });
 
-			assert.strictEqual(responseText.length, 0);
-		});
+    describe('createResponse', () => {
+        it('should return an empty string if no results are passed in', () => {
+            let responseText = tweetHandler.createResponse('FakeName', []);
 
-		it('should return a string including operations and results if results array is not empty', () => {
-			let results = [{operation: '2+2', result: 4}, {operation: '4/4', result: 1}];
-			let responseText = tweetHandler.createResponse('FakeName', results);
+            assert.strictEqual(responseText.length, 0);
+        });
 
-			assert.include(responseText, `${results[0].operation} = ${results[0].result}`);
-			assert.include(responseText, `${results[1].operation} = ${results[1].result}`);
-		});
+        it('should return a string including operations and results if results array is not empty', () => {
+            let results = [{operation: '2+2', result: 4}, {operation: '4/4', result: 1}];
+            let responseText = tweetHandler.createResponse('FakeName', results);
 
-		it('should throw an error and call createErrorMessage() if response has more than 140 characters', () => {
-			let spy = sandbox.spy(tweetHandler, 'createErrorMessage');
-			let results = [{operation: '0+2'.repeat(150), result: 0}];
+            assert.include(responseText, `${results[0].operation} = ${results[0].result}`);
+            assert.include(responseText, `${results[1].operation} = ${results[1].result}`);
+        });
 
-			assert.throws(() => {tweetHandler.createResponse('FakeUser', results)}, '@FakeUser');
-			assert.isTrue(spy.calledOnce);
-		});
-	});
+        it('should throw an error and call createErrorMessage() if response has more than 140 characters', () => {
+            let spy = sandbox.spy(tweetHandler, 'createErrorMessage');
+            let results = [{operation: '0+2'.repeat(150), result: 0}];
 
-	describe('createErrorMessage', () => {
-		it('should return an error message with username and error', () => {
-			let errorMessage = tweetHandler.createErrorMessage('FakeUser', ['randomErrorMessage', 'randomErrorMessage']);
-			assert.include(errorMessage, '@FakeUser');
-			assert.include(errorMessage, 'randomErrorMessage');
-		});
+            assert.throws(() => {
+                tweetHandler.createResponse('FakeUser', results);
+            }, '@FakeUser');
+            assert.isTrue(spy.calledOnce);
+        });
+    });
 
-		it('should return an error message containing an specificError if there is one', () => {
-			let errorMessage = tweetHandler.createErrorMessage('FakeUser', ['randomErrorMessage', 'randomErrorMessage'], 'specificError');
-			assert.include(errorMessage, 'specificError');
-		});
-	});
+    describe('createErrorMessage', () => {
+        it('should return an error message with username and error', () => {
+            let errorMessage = tweetHandler.createErrorMessage('FakeUser',
+                ['randomErrorMessage', 'randomErrorMessage']);
+            assert.include(errorMessage, '@FakeUser');
+            assert.include(errorMessage, 'randomErrorMessage');
+        });
+
+        it('should return an error message containing an specificError if there is one', () => {
+            let errorMessage = tweetHandler.createErrorMessage('FakeUser',
+                ['randomErrorMessage', 'randomErrorMessage'], 'specificError');
+            assert.include(errorMessage, 'specificError');
+        });
+    });
 });

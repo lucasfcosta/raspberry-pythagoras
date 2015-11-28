@@ -7,7 +7,7 @@ const mocha = require('gulp-mocha');
 // Lints JavaScript files
 gulp.task('jscs', () => {
     return gulp.src('**/*.js')
-	    .pipe(excludeGitignore())
+        .pipe(excludeGitignore())
         .pipe(jscs())
         .pipe(jscs.reporter())
         .pipe(jscs.reporter('fail'));
@@ -15,8 +15,8 @@ gulp.task('jscs', () => {
 
 // Lints JSON files
 gulp.task('jsonlint', () => {
-   	return gulp.src('**/*.json')
-	    .pipe(excludeGitignore())
+    return gulp.src('**/*.json')
+        .pipe(excludeGitignore())
         .pipe(jsonlint())
         .pipe(jsonlint.reporter())
         .pipe(jsonlint.failAfterError());
