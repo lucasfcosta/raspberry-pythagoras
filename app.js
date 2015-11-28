@@ -35,7 +35,7 @@ twitterClient.stream('statuses/filter', {track: `@${apiConfigs.username}`}, (str
                         if (error) {
                             console.log(`[DM Error] ${error.message}`);
                         } else {
-                            console.log(`[DM Sent] Sent DM with error ${handleError.message} to user ${username}.`);
+                            console.log(`[DM Sent] Sent DM with error:\n ${handleError.message} to user ${username}.`);
                         }
                     });
             } else {
