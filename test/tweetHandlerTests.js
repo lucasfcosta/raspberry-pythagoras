@@ -31,7 +31,7 @@ describe('tweetHandler Tests', () => {
         it('should call getOperations with tweet\'s text', () => {
             let spy = sandbox.spy(tweetHandler, 'getOperations');
 
-            tweetHandler.handle(fakeTweet, (error, responseText) => {
+            tweetHandler.handle(fakeTweet, () => {
                 assert.isTrue(spy.calledWithExactly('Fake text.\n2+2.\n4+4.'));
             });
         });
@@ -39,7 +39,7 @@ describe('tweetHandler Tests', () => {
         it('should call calculateResults with username and tweet\'s operations', () => {
             let spy = sandbox.spy(tweetHandler, 'calculateResults');
 
-            tweetHandler.handle(fakeTweet, (error, responseText) => {
+            tweetHandler.handle(fakeTweet, () => {
                 assert.isTrue(spy.calledWithExactly('FakeUser', ['2+2', '4+4']));
             });
         });
@@ -48,7 +48,7 @@ describe('tweetHandler Tests', () => {
             let spy = sandbox.spy(tweetHandler, 'createResponse');
             let operationsAndResults = [{operation: '2+2', result: 4}, {operation: '4+4', result: 8}];
 
-            tweetHandler.handle(fakeTweet, (error, responseText) => {
+            tweetHandler.handle(fakeTweet, () => {
                 assert.isTrue(spy.calledWithExactly('FakeUser', operationsAndResults));
             });
         });

@@ -31,7 +31,7 @@ twitterClient.stream('statuses/filter', {track: `@${apiConfigs.username}`}, (str
 
                 // Send DM to user explaining error
                 twitterClient.post('direct_messages/new', {screen_name: username, text: handleError.message},
-                    (error, tweet, response) => {
+                    (error) => {
                         if (error) {
                             console.log(`[DM Error] ${error.message}`);
                         } else {
@@ -39,7 +39,7 @@ twitterClient.stream('statuses/filter', {track: `@${apiConfigs.username}`}, (str
                         }
                     });
             } else {
-                twitterClient.post('statuses/update', {status: responseText}, (error, tweet, response) => {
+                twitterClient.post('statuses/update', {status: responseText}, (error) => {
                     if (error) {
                         console.log(`[Tweet Error] ${error}`);
                     } else {
@@ -59,7 +59,7 @@ twitterClient.stream('statuses/filter', {track: `@${apiConfigs.username}`}, (str
 setInterval(() => {
     let randomTipNumber = Math.floor(Math.random() * (chosenDictionary.idle.length - 1)) + 1;
     let randomTipText = chosenDictionary.idle[randomTipNumber];
-    twitterClient.post('statuses/update', {status: randomTipText}, (error, tweet, response) => {
+    twitterClient.post('statuses/update', {status: randomTipText}, (error) => {
         if (error) {
             console.log(`[Tip Tweet Error] ${error}`);
         } else {
